@@ -43,7 +43,35 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<header class="hero">
+<section class="card">
+  <h2>📊 Phone Analytics Dashboard</h2>
+  <p>Explore phone prices, brands, and specifications.</p>
+
+  <div class="row">
+    <div class="card">
+      <h3 id="totalPhones">Loading...</h3>
+      <p>Total Phones</p>
+    </div>
+    <div class="card">
+      <h3 id="totalBrands">Loading...</h3>
+      <p>Total Brands</p>
+    </div>
+    <div class="card">
+      <h3 id="averagePrice">Loading...</h3>
+      <p>Average Price</p>
+    </div>
+  </div>
+
+  <h3>Average Price by Brand</h3>
+  <canvas id="brandChart"></canvas>
+
+  <h3>RAM vs Phone Price</h3>
+  <canvas id="ramChart"></canvas>
+
+  <h3>Phone Price Distribution</h3>
+  <canvas id="priceChart"></canvas>
+</section>
+  <header class="hero">
   <h1>📱 Phone Price Predictor</h1>
   <p>Set your phone's specs below. Drag a slider, or type an exact value in the box, then press Predict.</p>
 </header>
@@ -169,6 +197,100 @@ $("form").onsubmit = async e => {
     btn.disabled = false; btn.textContent = "Predict price";
   }
 };
+  // Load phone dataset and build dashboard charts
+fetch("/phone_dataset.json")
+  .then(response => {
+    if (!response.ok) throw new Error("Dataset could not load");
+    return response.json();
+  })
+  .then(data => {
+    const phones = data.filter(p =>
+      Number.isFinite(Number(p.price)) &&
+      Number.isFinite(Number(p.ram_gb)) &&
+      Number.isFinite(Number(p.storage_gb))
+    );
+
+    document.getElementById("totalPhones").textContent = data.length;
+    document.getElementById("totalBrands").textContent =
+      new Set(data.map(p => p.brand).filter(Boolean)).size;
+
+    const prices = data.map(p => Number(p.price)).filter(Number.isFinite);
+    const average = prices.reduce((sum, price) => sum + price, 0) / prices.length;
+    document.getElementById("averagePrice").textContent =
+      "₹" + Math.round(average).toLocaleString("en-IN");
+
+    const brandPrices = {};
+    data.forEach(p => {
+      const price = Number(p.price);
+      if (p.brand && Number.isFinite(price)) {
+        brandPrices[p.brand] ??= [];
+        brandPrices[p.brand].push(price);
+      }
+    });
+
+    const topBrands = Object.entries(brandPrices)
+      .map(([brand, values]) => ({
+        brand,
+        average: values.reduce((a, b) => a + b, 0) / values.length
+      }))
+      .sort((a, b) => b.average - a.average)
+      .slice(0, 10);
+
+    new Chart(document.getElementById("brandChart"), {
+      type: "bar",
+      data: {
+        labels: topBrands.map(b => b.brand),
+        datasets: [{
+          label: "Average Price (₹)",
+          data: topBrands.map(b => Math.round(b.average))
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    new Chart(document.getElementById("ramChart"), {
+      type: "scatter",
+      data: {
+        datasets: [{
+          label: "RAM vs Price",
+          data: phones.map(p => ({
+            x: Number(p.ram_gb),
+            y: Number(p.price)
+          }))
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { title: { display: true, text: "RAM (GB)" } },
+          y: { title: { display: true, text: "Price (₹)" } }
+        }
+      }
+    });
+
+    const ranges = [
+      { label: "Under ₹5k", min: 0, max: 5000 },
+      { label: "₹5k–₹10k", min: 5000, max: 10000 },
+      { label: "₹10k–₹20k", min: 10000, max: 20000 },
+      { label: "₹20k–₹40k", min: 20000, max: 40000 },
+      { label: "Above ₹40k", min: 40000, max: Infinity }
+    ];
+
+    new Chart(document.getElementById("priceChart"), {
+      type: "bar",
+      data: {
+        labels: ranges.map(r => r.label),
+        datasets: [{
+          label: "Number of Phones",
+          data: ranges.map(r =>
+            prices.filter(p => p >= r.min && p < r.max).length
+          )
+        }]
+      },
+      options: { responsive: true }
+    });
+  })
+  .catch(error => console.error("Dashboard error:", error));
 </script>
 </body>
 </html>
