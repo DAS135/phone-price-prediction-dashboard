@@ -198,7 +198,7 @@ $("form").onsubmit = async e => {
   }
 };
   // Load phone dataset and build dashboard charts
-fetch("/phone_dataset.json")
+fetch("https://raw.githubusercontent.com/DAS135/phone-price-prediction-dashboard/main/phone_dataset.json")
   .then(response => {
     if (!response.ok) throw new Error("Dataset could not load");
     return response.json();
