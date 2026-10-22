@@ -246,6 +246,39 @@ section.card:has(#totalPhones) canvas {
 #startPrediction:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 35px rgba(40, 123, 255, 0.5);
+  
+/* BACK TO DASHBOARD BUTTON */
+#backDashboard {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  min-height: 68px;
+  margin: 30px auto 20px;
+  padding: 18px 30px;
+  background: linear-gradient(135deg, #3185ff, #1249e8);
+  color: #ffffff;
+  border: 1px solid #5598ff;
+  border-radius: 16px;
+  font-size: 22px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(40, 123, 255, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#backDashboard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(40, 123, 255, 0.5);
+}
+
+@media (max-width: 600px) {
+  #backDashboard {
+    max-width: 100%;
+    min-height: 60px;
+    font-size: 19px;
+  }
+}
+
 }
 
 </style>
@@ -307,7 +340,9 @@ section.card:has(#totalPhones) canvas {
     <p class="note">Based on specs only. Brand, design and offers can move the real price up or down.</p>
   </section>
 </main>
-  <button type="button" onclick="showPage('dashboardPage')">
+
+<button type="button" id="backDashboard"
+        onclick="showPage('dashboardPage')">
   ← Back to Dashboard
 </button>
 </div>
