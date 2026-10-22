@@ -107,6 +107,34 @@ canvas {
     padding: 16px !important;
   }
 }
+  
+/* DASHBOARD PREMIUM DARK THEME */
+body:has(#totalPhones) {
+  background: #07111f !important;
+  color: #edf4ff !important;
+}
+
+body:has(#totalPhones) section.card,
+body:has(#totalPhones) .card {
+  background: linear-gradient(145deg, #12213a, #0c1729) !important;
+  color: #edf4ff !important;
+  border: 1px solid #263b5d !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 28px #00000030;
+}
+
+body:has(#totalPhones) h1,
+body:has(#totalPhones) h2,
+body:has(#totalPhones) h3,
+body:has(#totalPhones) p {
+  color: #edf4ff;
+}
+
+body:has(#totalPhones) canvas {
+  background: transparent !important;
+  max-width: 100%;
+}
+
 
 </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
