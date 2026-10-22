@@ -229,6 +229,7 @@ section.card:has(#totalPhones) canvas {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <div id="dashboardPage">
 <section class="card">
   <h2>📊 Phone Analytics Dashboard</h2>
   <p>Explore phone prices, brands, and specifications.</p>
@@ -254,10 +255,22 @@ section.card:has(#totalPhones) canvas {
   <h3>RAM vs Phone Price</h3>
   <canvas id="ramChart"></canvas>
 
-  <h3>Phone Price Distribution</h3>
-  <canvas id="priceChart"></canvas>
+  
+<h3>Phone Price Distribution</h3>
+<canvas id="priceChart"></canvas>
 </section>
-  <header class="hero">
+
+<div style="text-align:center; margin:28px 0;">
+  <button type="button" id="startPrediction"
+    onclick="showPage('predictionPage')">
+    🚀 Start Prediction
+  </button>
+</div>
+
+</div>
+
+<div id="predictionPage" hidden>
+<header class="hero">
   <h1>📱 Phone Price Predictor</h1>
   <p>Set your phone's specs below. Drag a slider, or type an exact value in the box, then press Predict.</p>
 </header>
@@ -271,9 +284,33 @@ section.card:has(#totalPhones) canvas {
     <p class="note">Based on specs only. Brand, design and offers can move the real price up or down.</p>
   </section>
 </main>
+  <button type="button" onclick="showPage('dashboardPage')">
+  ← Back to Dashboard
+</button>
+</div>
 
 <script>
 const $ = id => document.getElementById(id);
+  
+function showPage(pageId) {
+  document.getElementById("dashboardPage").hidden =
+    pageId !== "dashboardPage";
+
+  document.getElementById("predictionPage").hidden =
+    pageId !== "predictionPage";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+  function showPage(pageId) {
+  document.getElementById("dashboardPage").hidden =
+    pageId !== "dashboardPage";
+
+  document.getElementById("predictionPage").hidden =
+    pageId !== "predictionPage";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
 const SECTIONS = [
   { t: "📺 Display", f: [
