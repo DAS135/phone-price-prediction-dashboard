@@ -136,6 +136,95 @@ body:has(#totalPhones) canvas {
 }
 
 
+  
+/* PREMIUM DASHBOARD LAYOUT */
+section.card:has(#totalPhones) {
+  max-width: 1400px;
+  margin: 32px auto;
+  padding: 32px;
+  background: linear-gradient(145deg, #101f37, #091426) !important;
+  border: 1px solid #29466d !important;
+  border-radius: 22px !important;
+  box-shadow: 0 12px 40px #00000040 !important;
+}
+
+section.card:has(#totalPhones) > h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 8px;
+  color: #ffffff !important;
+}
+
+section.card:has(#totalPhones) > p {
+  color: #a9bfdc !important;
+  margin-bottom: 24px;
+}
+
+/* KPI CARDS */
+section.card:has(#totalPhones) .row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding: 22px 0;
+}
+
+section.card:has(#totalPhones) .row .card {
+  margin: 0;
+  padding: 24px 20px !important;
+  background: linear-gradient(145deg, #172d4c, #10213a) !important;
+  border: 1px solid #2c4d78 !important;
+  border-radius: 16px !important;
+}
+
+section.card:has(#totalPhones) .row h3 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: #58a6ff !important;
+  margin-bottom: 6px;
+}
+
+section.card:has(#totalPhones) .row p {
+  color: #b4c7e2 !important;
+}
+
+/* CHART PANELS */
+section.card:has(#totalPhones) > h3 {
+  margin-top: 24px;
+  margin-bottom: 14px;
+  padding: 16px 18px;
+  background: #10213a;
+  border: 1px solid #29466d;
+  border-radius: 12px 12px 0 0;
+  color: #eaf3ff !important;
+}
+
+section.card:has(#totalPhones) canvas {
+  display: block;
+  width: 100% !important;
+  max-height: 340px;
+  margin-bottom: 24px;
+  padding: 14px;
+  background: #0c192c;
+  border: 1px solid #29466d;
+  border-radius: 0 0 12px 12px;
+}
+
+/* PREDICTION PAGE HEADER */
+.hero {
+  background: linear-gradient(120deg, #0b1b33, #123d80, #0866c6) !important;
+  border-bottom: 1px solid #2b70c9;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  section.card:has(#totalPhones) {
+    margin: 16px;
+    padding: 18px !important;
+  }
+
+  section.card:has(#totalPhones) .row {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
