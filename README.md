@@ -45,6 +45,7 @@ Vercel| Web application deployment
 📁 Project Structure
 
 phone-price-prediction-dashboard/
+
 ├── api/
 ├── models/
 ├── index.html
