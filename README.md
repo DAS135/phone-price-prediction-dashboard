@@ -8,6 +8,19 @@ An interactive web application that combines machine learning-based mobile phone
 
 This project extends an existing phone price prediction application with an interactive analytics dashboard and an improved user experience. It brings phone price estimation and data exploration together in one web application.
 
+🖥️ Application Screenshots
+
+📊 Analytics Dashboard
+
+"Phone Analytics Dashboard" (screenshots/Screenshot%202026-10-23%20195022.png)
+
+📱 Phone Price Predictor
+
+"Phone Price Predictor" (screenshots/Screenshot%202026-10-23%20195155.png)
+
+💰 Price Prediction Result
+
+"Price Prediction Result" (screenshots/Screenshot%202026-10-23%20195227.png)
 ✨ Features
 
 - 📱 Phone Price Prediction — Estimate mobile phone prices based on hardware specifications.
