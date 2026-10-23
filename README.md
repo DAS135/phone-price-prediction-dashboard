@@ -47,8 +47,11 @@ Vercel| Web application deployment
 phone-price-prediction-dashboard/
 
 ├── api/
+
 ├── models/
+
 ├── index.html
+
 ├── main.py
 ├── phone_dataset.json
 ├── requirements.txt
