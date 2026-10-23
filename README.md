@@ -12,15 +12,11 @@ This project extends an existing phone price prediction application with an inte
 
 📊 Analytics Dashboard
 
-"Phone Analytics Dashboard" (screenshots/Screenshot%202026-10-23%20195022.png)
+<img src="https://raw.githubusercontent.com/balachandradas/phone-price-prediction-dashboard/main/screenshots/Screenshot%202026-10-23%20195022.png" alt="Analytics Dashboard" width="100%"/>📱 Phone Price Predictor
 
-📱 Phone Price Predictor
+<img src="https://raw.githubusercontent.com/balachandradas/phone-price-prediction-dashboard/main/screenshots/Screenshot%202026-10-23%20195155.png" alt="Phone Price Predictor" width="100%"/>💰 Price Prediction Result
 
-"Phone Price Predictor" (screenshots/Screenshot%202026-10-23%20195155.png)
-
-💰 Price Prediction Result
-
-"Price Prediction Result" (screenshots/Screenshot%202026-10-23%20195227.png)
+<img src="https://raw.githubusercontent.com/balachandradas/phone-price-prediction-dashboard/main/screenshots/Screenshot%202026-10-23%20195227.png" alt="Price Prediction Result" width="100%"/>
 ✨ Features
 
 - 📱 Phone Price Prediction — Estimate mobile phone prices based on hardware specifications.
