@@ -1,206 +1,110 @@
-# 📱 Phone Price Predictor
+📱 Phone Price Prediction & Analytics Dashboard
 
-A web app that predicts phone prices based on specifications using a trained Random Forest model.
+An interactive web application that combines machine learning-based mobile phone price prediction with an analytics dashboard for exploring phone specifications, brands, and price trends.
 
-## Features
+🚀 "Live Demo" (https://phone-price-prediction-dashboard-b60vmnak0.vercel.app/) · 💻 "GitHub Repository" (https://github.com/balachandradas/phone-price-prediction-dashboard)
 
-- **Beautiful slider interface** - Full-width sliders with number inputs for precise control
-- **Smart pricing tiers** - Shows single price, ±₹500 range, or ±₹2,500 range based on predicted value
-- **Responsive design** - Works on desktop, tablet, and mobile
-- **Fast predictions** - Real-time price estimation
+📊 Overview
 
-## Tech Stack
+This project extends an existing phone price prediction application with an interactive analytics dashboard and an improved user experience. It brings phone price estimation and data exploration together in one web application.
 
-- **Backend**: FastAPI + scikit-learn
-- **Frontend**: HTML + CSS + Vanilla JavaScript
-- **Deployment**: Vercel (serverless)
+✨ Features
 
-## Local Setup
+- 📱 Phone Price Prediction — Estimate mobile phone prices based on hardware specifications.
+- 📊 Interactive Analytics Dashboard — View dataset summaries and explore phone data.
+- 🏷️ Brand-wise Price Analysis — Compare average prices across phone brands.
+- 🧠 RAM vs. Price Analysis — Explore the relationship between RAM capacity and phone prices.
+- 📈 Price Distribution — Visualize how phone prices are distributed across the dataset.
+- 🎛️ Interactive Interface — Navigate between the dashboard and prediction form.
+- 📱 Responsive Design — Designed for convenient use across different screen sizes.
 
-### Prerequisites
-- Python 3.8+
-- pip (Python package manager)
+🛠️ Tech Stack
 
-### Installation
+Technology| Purpose
+Python| Backend and prediction logic
+FastAPI| Prediction API
+Scikit-learn| Machine learning
+HTML5| Web page structure
+CSS3| Styling and responsive interface
+JavaScript| Dashboard interactions and charts
+JSON| Phone dataset
+Vercel| Web application deployment
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/kmrot-twest/phone-price-predictor.git
-   cd phone-price-predictor
-   ```
+⚙️ How It Works
 
-2. **Create virtual environment**
-   ```bash
-   python -m venv venv
-   
-   # Windows
-   venv\Scripts\activate
-   
-   # macOS/Linux
-   source venv/bin/activate
-   ```
+1. Explore phone statistics and visualizations on the analytics dashboard.
+2. Open the prediction page and enter phone specifications.
+3. The frontend sends the specification data to the prediction API.
+4. The trained machine learning model estimates the phone price.
+5. The predicted result is displayed in the web interface.
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+🌐 Live Application
 
-4. **Ensure models are in place**
-   ```
-   models/
-   ├── phone_price_pipeline.pkl
-   └── phone_price_pipeline_no_brand.pkl
-   ```
+"Open Phone Price Prediction & Analytics Dashboard" (https://phone-price-prediction-dashboard-b60vmnak0.vercel.app/)
 
-5. **Run locally**
-   ```bash
-   uvicorn main:app --reload
-   ```
-   
-   Open `http://localhost:8000` in your browser.
+📁 Project Structure
 
-## Project Structure
-
-```
-phone-price-predictor/
-├── main.py                      # FastAPI app (local development)
+phone-price-prediction-dashboard/
 ├── api/
-│   └── index.py                 # FastAPI app (Vercel serverless)
-├── index.html                   # Frontend (HTML + CSS + JS)
 ├── models/
-│   ├── phone_price_pipeline.pkl
-│   └── phone_price_pipeline_no_brand.pkl
+├── index.html
+├── main.py
+├── phone_dataset.json
 ├── requirements.txt
 ├── vercel.json
-├── .gitignore
+├── DEPLOYMENT_GUIDE.md
 └── README.md
-```
 
-## How It Works
+💻 Run Locally
 
-1. User enters phone specifications via sliders or number inputs
-2. Frontend sends data as JSON to `/predict` endpoint
-3. Backend loads model and predicts price
-4. Price range is calculated based on tiers:
-   - **Under ₹2,500**: Single value only
-   - **₹2,500 – ₹5,000**: ±₹500 range
-   - **Over ₹5,000**: ±₹2,500 range
-5. Result displays at the bottom of the page
+Prerequisites
 
-## Deployment on Vercel
+- Python 3.8 or later
+- pip (Python package manager)
 
-### Prerequisites
-- GitHub account
-- Vercel account (free tier works)
+Installation
 
-### Steps
+1. Clone the repository
 
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
+git clone https://github.com/balachandradas/phone-price-prediction-dashboard.git
+cd phone-price-prediction-dashboard
 
-2. **Import to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Select your GitHub repository
-   - Vercel auto-detects `vercel.json` config
-   - Click "Deploy"
+2. Create a virtual environment
 
-3. **That's it!** Your app is live
+python -m venv venv
 
-### Important Notes for Vercel
+3. Activate the environment
 
-- Model files are included in the deployment (total ~40 MB, within Vercel's 512 MB limit)
-- Serverless functions have a default 10-second timeout (extended to 60 seconds in `vercel.json`)
-- First request may take a few seconds (cold start) as the model loads
-- Subsequent requests are fast
+Windows:
 
-## API Endpoints
+venv\Scripts\activate
 
-### GET `/`
-Returns the HTML frontend.
+macOS/Linux:
 
-### POST `/predict`
-Accepts JSON with phone specs, returns predicted price.
+source venv/bin/activate
 
-**Request:**
-```json
-{
-  "screen_size": 6.1,
-  "refresh_rate": 90,
-  "resolution_width": 1080,
-  "resolution_height": 2400,
-  "ram_gb": 8,
-  "storage_gb": 128,
-  "cpu_cores": 8,
-  "cpu_speed": 2.8,
-  "rear_camera_mp": 50,
-  "front_camera_mp": 16,
-  "rear_camera_count": 2,
-  "battery_mah": 5000,
-  "charging_w": 33,
-  "has_5g": 1,
-  "has_4g": 1,
-  "has_3g": 1,
-  "has_wifi": 1,
-  "has_nfc": 0
-}
-```
+4. Install dependencies
 
-**Response (single price):**
-```json
-{
-  "mode": "single",
-  "value": 24500
-}
-```
-
-**Response (range):**
-```json
-{
-  "mode": "range",
-  "low": 24900,
-  "high": 29900
-}
-```
-
-## Troubleshooting
-
-### Local: "Module not found" errors
-```bash
 pip install -r requirements.txt
-```
 
-### Local: Model not loading
-Ensure `models/phone_price_pipeline_no_brand.pkl` exists in the models folder.
+5. Start the application
 
-### Vercel: 502 Bad Gateway
-Usually a cold start timeout. Wait 30 seconds and try again. Consider upgrading Vercel plan for faster cold starts.
+Use the startup command specified in "DEPLOYMENT_GUIDE.md" and ensure the required model files are available.
 
-### Vercel: Model file not found
-Check that the `models/` folder is committed to GitHub. `.gitignore` should NOT exclude `models/`.
+🎯 Project Objectives
 
-## Development
+- Apply machine learning to a practical phone price prediction problem.
+- Present dataset insights through interactive visualizations.
+- Integrate a prediction model with a web-based interface.
+- Improve the usability of a machine learning application.
 
-### Testing Locally
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"screen_size": 6.1, "refresh_rate": 90, ...}'
-```
+🤝 Acknowledgment
 
-### Updating Dependencies
-```bash
-pip freeze > requirements.txt
-```
+This project builds upon an original phone price prediction application created by a friend. I acknowledge the original project foundation and have continued developing my version with an analytics dashboard, interface improvements, and related enhancements.
 
-## License
+#Author
 
-MIT
+Balachandradas K P
+---
 
-## Author
-
-Built with ❤️ for phone enthusiasts.
+Built as a hands-on learning project to explore machine learning and web application development.
